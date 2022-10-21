@@ -1,0 +1,233 @@
+AssociationApp:-
+==============
+
+
+create database AssociationApp
+-----------------------------
+
+create table tblassotype:-
+-----------------------
+
+create table tblassotype(
+id int not null auto_increment,
+txtAssotype varchar(50),
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn	datetime,
+txtDeleteflag	INT(1) DEFAULT 0,
+primary key(id)
+);
+
+insert into tblassotype (txtAssotype) values ('Old Mutual'),('FirstRand'),('Naspers'),('ABSA'),('Exxaro');
+
+output:-
+------
+
+# id, txtAssotype, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+  1,  Old Mutual,   		 ,             ,		     , 	      ,     0
+  2,  FirstRand,               ,             ,             ,            ,     0		
+  3,  Naspers,                 ,             ,             ,            ,     0
+  4,  ABSA,                    ,             ,             ,            ,     0 
+  5,  Exxaro,  		       , 		   ,		     , 		,     0
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+create table tblusers:-
+---------------------
+create table tblusers(
+id int not null auto_increment,
+txtFname varchar(50),
+txtLname varchar(50),
+txtUpassword varchar(50),
+txtUphoneno varchar(50),
+txtJob varchar(50),
+txtUemail varchar(50),
+txtUaddress varchar(100),
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn datetime,
+txtDeleteflag int default 0,
+primary key (id)
+);
+
+-----------------------------
+insert tblusers:-
+-------------------
+insert into tblusers (txtFname,txtLname,txtUpassword,txtUphoneno,txtJob,txtUemail,txtUaddress) 
+values
+('Michael','Clarke','992312','111111','	Pharmacist','michael@gmail.com','New Orieans'),
+('Peter','Tyson','986437','222222','Painter','tyson@gmail.com','Anchorage'),
+('Rajesh','Krishnan','563731','333333','Graphic Designer','rajesh@gmail.com','Brighton'),
+('Daniel','Chen','636727','444444','Mechanical Engineer','daniel@gmail.com','Hamilton'),
+('James','Davis','876633','555555','Company Driver','james@gmail.com','	Bridgeport');
+
+output:- 
+# id, txtFname,  txtLname, txtUpassword, txtUphoneno,   txtJob,            txtUemail,         txtUaddress, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+   1, Michael,   Clarke,   992312,       111111, 	Pharmacist,          michael@gmail.com, New Orieans, 		  ,		    , 		,	          ,   0
+   2, Peter,     Tyson,    986437,       222222,      Painter,             tyson@gmail.com,   Anchorage, 		  ,		    , 		,		    ,   0
+   3, Rajesh,    Krishnan, 563731,       333333,      Graphic Designer,    rajesh@gmail.com,  Brighton, 		  , 		    ,             ,    		    ,   0
+   4, Daniel,    Chen,     636727,       444444,      Mechanical Engineer, daniel@gmail.com,  Hamilton, 		  ,		    ,			, 		    ,   0
+   5, James,     Davis,    876633,       555555,      Company Driver,      james@gmail.com,   Bridgeport,		  ,		    ,             ,               ,   0
+  
+----------------------------------------------------
+create table tblassociation :-
+---------------------------
+
+
+create table tblassociation (
+id int not null auto_increment,
+txtAssociationname varchar(50),
+txtAcronim  varchar(50),
+refAssotype int,
+txtEmail varchar(50),
+txtPhonenumber varchar(50),
+txtPostalno varchar(50),
+txtAssodetails varchar(200),
+txtWebsiteurl varchar(50),
+txtHqaddress varchar(50),
+txtBranches varchar(50),
+txtDescription varchar(200),
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn datetime,
+txtDeleteflag int default 0,
+primary key (id),
+foreign key (refAssotype) references tblassotype(id)
+);
+------------------
+
+insert tblassociation:-
+---------------------
+insert into tblassociation (txtAssociationname,txtAcronim,refAssotype,txtEmail,txtPhonenumber,txtPostalno,txtAssodetails,txtWebsiteurl,txtHqaddress,txtBranches,txtDescription)
+values
+('Everest','Evr','1','evr@gmail.com','666666','682006','AAA','www.evr.com','HQAAA','Ernakulam','AAA123'),
+('Ron Anderson','Rona','2','rona@gmail.com','777777','682021','BBB','www.rona.com','HQBBB','Trivandrum','BBB123'),
+('Valley Cycle','Vac','3','vac@gmail.com','888888','682032','CCC','www.vac.com','HQCCC','Bangalore','CCC123'),
+('Trident','Tri','4	','tri@gmail.com','999999','682007','DDD','www.tri.com','HQDDD','Chennai','DDD123'),
+('Testcust','Test','5','test@gmail.com','121212','682043','EEE','www.test.com','HQEEE','Salem','EEE123');
+
+output:-
+-------
+
+# id, txtAssociationname, txtAcronim, refAssotype, txtEmail, txtPhonenumber, txtPostalno, txtAssodetails, txtWebsiteurl, txtHqaddress, txtBranches, txtDescription, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+1, Everest, Evr, 1, evr@gmail.com, 666666, 682006, AAA, www.evr.com, HQAAA, Ernakulam, AAA123, , , , , 0
+2, Ron Anderson, Rona, 2, rona@gmail.com, 777777, 682021, BBB, www.rona.com, HQBBB, Trivandrum, BBB123, , , , , 0
+3, Valley Cycle, Vac, 3, vac@gmail.com, 888888, 682032, CCC, www.vac.com, HQCCC, Bangalore, CCC123, , , , , 0
+4, Trident, Tri, 4, tri@gmail.com, 999999, 682007, DDD, www.tri.com, HQDDD, Chennai, DDD123, , , , , 0
+5, Testcust, Test, 5, test@gmail.com, 121212, 682043, EEE, www.test.com, HQEEE, Salem, EEE123, , , , , 0
+-------------------------------------------------------------------------------------------------------------------------------------
+
+create table tblassocaitionmap:-
+------------------------------
+
+create table tblassocaitionmap(
+id int not null auto_increment,
+refUserid int,
+refAssoid int,
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn datetime,
+txtDeleteflag int default 0,
+primary key (id),
+foreign key (refUserid) references tblusers(id),
+foreign key (refAssoid) references tblassociation(id)
+);
+-------
+ 
+insert tblassocaitionmap:-
+-----------------------
+insert into tblassocaitionmap(refUserid,refAssoid)
+values 
+('2','1'),
+('3','4'),
+('4','5');
+
+
+output:-
+------
+
+# id, refUserid, refAssoid, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+  1,     2,           1,                , 		,		  , 	         ,     0
+  2,     3,           4,                ,             ,             ,            ,     0
+  3,     4,           5,                ,             ,             ,            ,     0 
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------
+
+create table tblcategory:-
+------------------------
+
+create table tblcategory(
+id int not null auto_increment,
+txtCategoryname varchar(50),
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn datetime,
+txtDeleteflag int default 0,
+primary key(id)
+);
+------
+
+insert tblcategory:-
+------------------
+
+insert into tblcategory(txtCategoryname)
+values
+('Painter'),('Carpenter'),('Welder');
+
+
+output:-
+------
+
+
+# id, txtCategoryname, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+  1,    Painter,			     ,		 ,		   , 		    ,		 0
+  2,    Carpenter, 	           , 		 ,		   , 		    ,		 0
+  3,    Welder,		           ,   		 ,		   ,            ,        0
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------
+
+create table tblcategorymap:-
+---------------------------
+
+create table tblcategorymap(
+id int not null auto_increment,
+refCatid int,
+refUserid int,
+txtCreatedBy varchar(50),
+txtCreatedOn datetime,
+txtUpdatedBy varchar(50),
+dtUpdatedOn datetime,
+txtDeleteflag int default 0,
+primary key (id),
+foreign key (refCatid) references tblcategory(id),
+foreign key (refUserid) references tblusers(id)
+);
+
+
+insert tblcategorymap:-
+-----------------------
+insert into tblcategorymap(refCatid,refUserid)
+ values
+ ('1','1');
+
+
+output:-
+# id, refCatid, refUserid, txtCreatedBy, txtCreatedOn, txtUpdatedBy, dtUpdatedOn, txtDeleteflag
+   1,   1,       2,      ,             , , , 0
+
+
+
+--------------------------------------------------------------------------------------------------------------------------
+select id from tblusers where (txtUemail ="michael@gmail.com" or txtUphoneno ="111111") and txtUpassword ="992312";
+
+--------------------------------------------------------------------------------------------------------------
+
